@@ -2,27 +2,49 @@ import { useContext } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../Providers/AuthProvider';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
-  const {createUser}= useContext(AuthContext)
+  const {createUser,  updateUserProfile}= useContext(AuthContext)
   const onSubmit = data=>{
 
     createUser(data.email, data.password)
     .then(result => {
       const user = result.user;
       console.log(user)
+updateUserProfile( data.name, data.photoURL)
+.then(()=>{
+  reset()
+  Swal.fire({
+    position: 'top-end',
+    icon: 'success',
+    title: 'user updated Successfully',
+    showConfirmButton: false,
+    timer: 1500
+  })
+  navigate('/')
+})
+.catch((error)=>{
+  console.log(error)
+
+})
+
+
     })
     .catch(error=>{
       console.log(error)
     })
     console.log(data)
+
   } 
   return (
    <>
@@ -43,6 +65,13 @@ const SignUp = () => {
             </label>
             <input type="text" {...register('name', { required: true })} name='name' placeholder="Name" className="input input-bordered" />
             {errors.name && <p className='text-orange-400'> name is required.</p>}
+          </div>
+          <div className="form-control">
+            <label className="label">
+              <span className="label-text">PhotoURl</span>
+            </label>
+            <input type="text" {...register('photoURL', { required: true })}  placeholder="PhotoURL" className="input input-bordered" />
+            {errors.photoURL && <p className='text-orange-400'> Photo is required is required.</p>}
           </div>
           <div className="form-control">
             <label className="label">
