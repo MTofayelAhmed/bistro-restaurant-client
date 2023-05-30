@@ -1,19 +1,30 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../Providers/AuthProvider";
 import Swal from "sweetalert2";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import useCart from "../../../Hooks/useCart";
 
 const FoodCard = ({item}) => {
-  const {price, name, recipe, image}= item
+  const [cart, refetch]= useCart()
+  const {price, name, recipe, image, _id}= item
   const {user}= useContext(AuthContext)
   const navigate = useNavigate()
-
+   const location = useLocation()
   const handleCart = (item)=>{
-    if(user){
-      fetch('http://localhost:5000/carts')
+  
+    if(user && user.email){
+      const cartItem= {menuId:_id, name, image, price, recipe, email: user.email}
+      fetch('http://localhost:5000/carts', {
+        method: "POST",
+        headers:{ 'content-type':  'application/json',
+        },
+        body: JSON.stringify(cartItem)
+
+      })
       .then(res=> res.json())
       .then(data=> {
         if(data.insertedId){
+          refetch()
           Swal.fire({
             position: 'top-end',
             icon: 'success',
@@ -37,7 +48,7 @@ const FoodCard = ({item}) => {
         confirmButtonText: 'Yes, i will log!'
       }).then((result) => {
         if (result.isConfirmed) {
-          navigate('/login')
+          navigate('/login', {state: {from: location}})
         }
       })
     }
