@@ -56,7 +56,7 @@ import MyCart from "../Pages/DashBoard/MyCart.jsx/Mycart";
     element: <Dashboard></Dashboard>,
     children: [
     
-      {path: 'MyCart',
+      {path: 'myCart',
         element: <MyCart></MyCart>
       }
     ]
