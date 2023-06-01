@@ -11,7 +11,6 @@ const FoodCard = ({item}) => {
   const navigate = useNavigate()
    const location = useLocation()
   const handleCart = (item)=>{
-  
     if(user && user.email){
       const cartItem= {menuId:_id, name, image, price, recipe, email: user.email}
       fetch('http://localhost:5000/carts', {

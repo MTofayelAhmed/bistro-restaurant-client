@@ -1,9 +1,13 @@
 import { NavLink, Outlet } from "react-router-dom";
-import { FaShoppingCart, FaHome, FaCalendarAlt , FaWallet} from 'react-icons/fa';
+import { FaShoppingCart, FaHome, FaCalendarAlt , FaWallet, FaUtensils, FaBook, FaUsers} from 'react-icons/fa';
 import { Helmet } from "react-helmet-async";
+import useCart from "../../Hooks/useCart";
 
 
 const Dashboard = () => {
+  const [cart]= useCart()
+// TODO: 
+  const isAdmin = true;
   return (
     <div className="drawer drawer-mobile">
 
@@ -21,11 +25,36 @@ const Dashboard = () => {
       <label htmlFor="my-drawer-2" className="drawer-overlay"></label> 
       <ul className="menu p-4 w-80 ">
      
+       {
+        isAdmin ? <>
+        
+        <li><NavLink to='/dashboard/home'><FaHome></FaHome>Admin Home</NavLink></li>
+       
+        <li><NavLink to='/dashboard/reservation'><FaUtensils></FaUtensils> Add Item</NavLink></li>
+        <li><NavLink to='/payment'><FaWallet></FaWallet> Manage Items </NavLink> </li>
+        <li><NavLink to='/payment'><FaBook></FaBook> Manage Booking </NavLink> </li>
+        <li><NavLink to='/dashboard/allusers'><FaUsers></FaUsers> All users </NavLink> </li>
+        
+        </> :  <>
         <li><NavLink to='/dashboard/home'><FaHome></FaHome>User Home</NavLink></li>
-        <li><NavLink to='/dashboard/myCart'><FaShoppingCart></FaShoppingCart> MyCart</NavLink></li>
+        <li><NavLink to='/dashboard/myCart'><FaShoppingCart></FaShoppingCart> MyCart
+        
+        <div className="badge badge-secondary">+ {cart?.length || 0}</div>
+        
+        </NavLink></li>
         <li><NavLink to='/dashboard/reservation'><FaCalendarAlt></FaCalendarAlt> Reservation</NavLink></li>
         <li><NavLink to='/payment'><FaWallet></FaWallet> Payment</NavLink> </li>
+        
+        </>
+       }
+      
+      
+      {/* DIvider */}
         <div className="divider"></div>
+
+
+
+
         <li><NavLink to='/'> <FaHome></FaHome>Home</NavLink></li>
         <li> <NavLink to="/menu"> Our Menu</NavLink></li>
         <li><NavLink></NavLink></li>
