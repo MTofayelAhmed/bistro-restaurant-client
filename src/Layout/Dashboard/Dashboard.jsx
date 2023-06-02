@@ -2,12 +2,14 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaShoppingCart, FaHome, FaCalendarAlt , FaWallet, FaUtensils, FaBook, FaUsers} from 'react-icons/fa';
 import { Helmet } from "react-helmet-async";
 import useCart from "../../Hooks/useCart";
+import useAdmin from "../../Hooks/useAdmin";
 
 
 const Dashboard = () => {
   const [cart]= useCart()
 // TODO: 
-  const isAdmin = true;
+  // const isAdmin = true;
+  const [isAdmin] = useAdmin()
   return (
     <div className="drawer drawer-mobile">
 
