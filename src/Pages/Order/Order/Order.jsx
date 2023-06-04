@@ -16,6 +16,7 @@ const Order = () => {
  
   console.log(category)
   const [menu] = useMenu();
+  console.log(menu)
   const [tabIndex, setTabIndex] = useState(initialIndex);
 
   const salad = menu.filter((item) => item.category === "salad");
