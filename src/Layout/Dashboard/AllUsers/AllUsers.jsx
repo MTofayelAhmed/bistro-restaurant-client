@@ -5,8 +5,8 @@ import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 
 const AllUsers = () => {
   const {axiosSecure}= useAxiosSecure()
-  const { data: users = [], refetch } = useQuery(["users"], async () => {
-    const res = await axiosSecure.get("/users");
+  const { refetch ,  data: users = []} = useQuery(["users"], async () => {
+    const res = await axiosSecure.get("/users")
     return res.data;
   });
   const handleDelete = (user) => {

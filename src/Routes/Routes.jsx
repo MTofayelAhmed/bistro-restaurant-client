@@ -13,6 +13,8 @@ import Secret from "../Pages/Shared/Secret/Secret";
 import MyCart from "../Pages/DashBoard/MyCart.jsx/Mycart";
 import AllUsers from "../Layout/Dashboard/AllUsers/Allusers";
 import Dashboard from "../Layout/Dashboard/Dashboard";
+import AddItem from "../Pages/DashBoard/AddItem/AddItem";
+import AdminRoute from "./AdminRoute";
 
 
 
@@ -64,6 +66,10 @@ import Dashboard from "../Layout/Dashboard/Dashboard";
       {
         path: 'allusers',
         element: <AllUsers></AllUsers>
+      },
+      {
+        path: 'addItem',
+        element: <AdminRoute><AddItem></AddItem></AdminRoute>
       }
     ]
   }
