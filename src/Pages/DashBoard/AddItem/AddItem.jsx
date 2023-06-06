@@ -11,7 +11,7 @@ const AddItem = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+   reset
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
@@ -38,6 +38,7 @@ const AddItem = () => {
           axiosSecure.post("/menu", newItem).then((data) => {
             console.log("after posting new menu Item", data.data);
             if (data.data.insertedId) {
+              reset()
               Swal.fire({
                 position: "top-end",
                 icon: "success",
@@ -45,13 +46,13 @@ const AddItem = () => {
                 showConfirmButton: false,
                 timer: 1500,
               });
+             
             }
           });
         }
       });
   };
-  console.log(errors);
-  console.log(image_key);
+ 
 
   return (
     <div className="w-Full px-10">

@@ -2,20 +2,20 @@ import { NavLink, Outlet } from "react-router-dom";
 import { FaShoppingCart, FaHome, FaCalendarAlt , FaWallet, FaUtensils, FaBook, FaUsers} from 'react-icons/fa';
 import { Helmet } from "react-helmet-async";
 import useCart from "../../Hooks/useCart";
-import useAdmin from "../../Hooks/useAdmin";
+// import useAdmin from "../../Hooks/useAdmin";
 // import useAdmin from "../../Hooks/useAdmin";
 
 
 const Dashboard = () => {
   const [cart]= useCart()
 // // TODO: 
-  // const isAdmin = true;
-  const [isAdmin] = useAdmin()
+  const isAdmin = true;
+  // const [isAdmin] = useAdmin()
   return (
     <div className="drawer drawer-mobile">
 
 
-<Helmet>
+        <Helmet>
         <title> Bistro Boss | DashBoard</title>
       </Helmet>
     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -32,9 +32,8 @@ const Dashboard = () => {
         isAdmin ? <>
         
         <li><NavLink to='/dashboard/home'><FaHome></FaHome>Admin Home</NavLink></li>
-       
         <li><NavLink to='/dashboard/addItem'><FaUtensils></FaUtensils> Add an Item</NavLink></li>
-        <li><NavLink to='/payment'><FaWallet></FaWallet> Manage Items </NavLink> </li>
+        <li><NavLink to='/dashboard/manageItem'><FaWallet></FaWallet> Manage Items </NavLink> </li>
         <li><NavLink to='/payment'><FaBook></FaBook> Manage Booking </NavLink> </li>
         <li><NavLink to='/dashboard/allusers'><FaUsers></FaUsers> All users </NavLink> </li>
         

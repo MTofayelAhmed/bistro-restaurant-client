@@ -4,20 +4,24 @@ import Swal from "sweetalert2";
 import { useLocation, useNavigate } from "react-router-dom";
 import useCart from "../../../Hooks/useCart";
 
+// TODO problem in FootCRT
+
+
+
 const FoodCard = ({item}) => {
-  const [ refetch]= useCart()
+  const [refetch]= useCart()
   const {price, name, recipe, image, _id}= item
   const {user}= useContext(AuthContext)
   const navigate = useNavigate()
    const location = useLocation()
   const handleCart = (item)=>{
     if(user && user.email){
-      const cartItem= {menuId:_id, name, image, price, recipe, email: user.email}
+      const item= {menuId:_id, name, image, price, recipe, email: user.email}
       fetch('http://localhost:5000/carts', {
         method: "POST",
         headers:{ 'content-type':  'application/json',
         },
-        body: JSON.stringify(cartItem)
+        body: JSON.stringify(item)
 
       })
       .then(res=> res.json())
@@ -51,17 +55,17 @@ const FoodCard = ({item}) => {
         }
       })
     }
-    console.log(item)
+
   }
   return (
     <div className="card w-96 bg-base-100 shadow-xl">
-    <figure><img src={image} alt="Shoes" /></figure>
+    <figure><img src={image} alt="" /></figure>
     <p className=" absolute right-0 mt-4 mr-6 rounded p-2 text-white bg-gray-700 ">${price}</p>
     <div className="card-body flex flex-col items-center">
       <h2 className="card-title">{name}</h2>
       <p>{recipe}</p>
       <div className="card-actions justify-end">
-        <button onClick={()=>{ handleCart(item)}} className="btn btn-outline border-0 border-b-4 mt-4 border-orange-300  bg-slate-100">Add to cart</button>
+      <button onClick={()=>{ handleCart(item)}} className="btn btn-outline border-0 border-b-4 mt-4 border-orange-300  bg-slate-100">Add to cart</button>
       </div>
     </div>
   </div>)

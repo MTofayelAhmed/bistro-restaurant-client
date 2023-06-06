@@ -10,11 +10,13 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from "./PrivateRoute";
 import Secret from "../Pages/Shared/Secret/Secret";
-import MyCart from "../Pages/DashBoard/MyCart.jsx/Mycart";
+
 import AllUsers from "../Layout/Dashboard/AllUsers/Allusers";
 import Dashboard from "../Layout/Dashboard/Dashboard";
 import AddItem from "../Pages/DashBoard/AddItem/AddItem";
 import AdminRoute from "./AdminRoute";
+import ManageItem from "../Pages/DashBoard/ManageItem/ManageItem";
+import MyCart from "../Pages/DashBoard/MyCart.jsx/MyCart";
 
 
 
@@ -70,6 +72,10 @@ import AdminRoute from "./AdminRoute";
       {
         path: 'addItem',
         element: <AdminRoute><AddItem></AddItem></AdminRoute>
+      },
+      {path: 'manageItem',
+      element: <AdminRoute><ManageItem></ManageItem></AdminRoute>
+
       }
     ]
   }
